@@ -1,4 +1,4 @@
-function PopupImage(props) {
+function ImagePopup(props) {
     const className = `popup popup_type_image ${props.isOpen ? "popup_opened" : ""}`
 
     return (
@@ -12,4 +12,4 @@ function PopupImage(props) {
     )
 }
 
-export default PopupImage;
+export default ImagePopup;

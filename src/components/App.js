@@ -3,7 +3,7 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
-import PopupImage from "./PopupImage.js"
+import ImagePopup from "./ImagePopup.js"
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -63,7 +63,7 @@ function App() {
         
       </PopupWithForm>
 
-      <PopupImage card={selectedCard} onClose={closePopup} isOpen={isImagePopupOpen}/>
+      <ImagePopup card={selectedCard} onClose={closePopup} isOpen={isImagePopupOpen}/>
 
       <template className="card-template">
         <article className="photo-card">
