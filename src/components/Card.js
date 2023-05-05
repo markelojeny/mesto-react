@@ -5,8 +5,9 @@ function Card(props) {
   function handleClick() {
     props.onCardClick(props.card);
   }
+  
   return (
-    <article className="photo-card" key={props.card._id}>
+    <article className="photo-card" key={props.key}>
       <img onClick={handleClick} className="photo-card__picture photo-card__button-picture" src={props.card.link} alt={props.card.name} />
       <div className="photo-card__group">
         <h2 className="photo-card__title">{props.card.name}</h2>
