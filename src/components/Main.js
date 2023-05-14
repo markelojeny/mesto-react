@@ -48,7 +48,7 @@ function Main(props) {
 
         <section className="photo-cards">
           {cards.map((data, i) => {
-            return <Card card={data} key={i._id} onCardClick={props.onCardClick} />
+            return <Card card={data} key={data._id} onCardClick={props.onCardClick} />
             }
           )}
         </section>
