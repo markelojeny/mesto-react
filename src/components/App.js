@@ -18,6 +18,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({ });
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([])
+  const [isLoading, setIsLoading] = React.useState(false)
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -74,31 +75,37 @@ function App() {
   }
 
   function handleUpdateUser(info) {
+    setIsLoading(true);
     api.editUser(info)
     .then((data) => {
       setCurrentUser(data);
       closePopup();
     })
-    .catch(error => console.error(error));
+    .catch(error => console.error(error))
+    .finally(() => setIsLoading(false));
   }
 
   function handleUpdateAvatar(info) {
+    setIsLoading(true);
     api.changeAvatar(info)
     .then((res) => {
       setCurrentUser(res);
       //console.log(res);
       closePopup();
     })
-    .catch(error => console.error(error));
+    .catch(error => console.error(error))
+    .finally(() => setIsLoading(false));
   }
   function handleAddPlaceSubmit(info) {
+    setIsLoading(true);
     api.addCard(info)
     .then((newCard) => {
       setCards([newCard, ...cards]);
       //console.log(newCard);
       closePopup();
     })
-    .catch(error => console.error(error));
+    .catch(error => console.error(error))
+    .finally(() => setIsLoading(false));
   }
 
   return (
@@ -116,14 +123,18 @@ function App() {
 
       <EditProfilePopup isOpen={isEditProfilePopupOpen} 
       onClose={closePopup} 
-      onUpdateUser={handleUpdateUser}/> 
+      onUpdateUser={handleUpdateUser}
+      isLoading={isLoading} /> 
 
       <AddPlacePopup isOpen={isAddPlacePopupOpen} 
       onClose={closePopup} 
-      onUpdateCard={handleAddPlaceSubmit}/> 
+      onUpdateCard={handleAddPlaceSubmit}
+      isLoading={isLoading} /> 
 
       <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} 
-      isOpen={isEditAvatarPopupOpen} onClose={closePopup} />
+      isOpen={isEditAvatarPopupOpen} 
+      onClose={closePopup}
+      isLoading={isLoading} />
 
       <PopupWithForm name="agreement" title="Вы уверены?" text="Да" onClose={closePopup} forms="agreement">
         
@@ -131,19 +142,6 @@ function App() {
 
       <ImagePopup card={selectedCard} onClose={closePopup} isOpen={isImagePopupOpen}/>
 
-      <template className="card-template">
-        <article className="photo-card">
-          <img className="photo-card__picture photo-card__button-picture" src="#" alt=" "/>
-          <div className="photo-card__group">
-            <h2 className="photo-card__title"></h2>
-            <div className="like">
-              <button className="like__button" type="button"></button>
-              <h3 className="like__number">6</h3>
-            </div>
-          </div>
-          <button className="photo-card__button-delete" type="button"></button>
-        </article>
-      </template>
       </CurrentUserContext.Provider>
     </>
   );

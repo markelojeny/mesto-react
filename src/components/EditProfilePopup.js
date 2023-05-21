@@ -39,25 +39,35 @@ function EditProfilePopup(props) {
         <>
         <PopupWithForm name="edit" 
             title="Редактировать профиль" 
-            text="Сохранить" 
+            text={props.isLoading ? 'Сохранение...' : 'Сохранить'} 
             onClose={props.onClose} 
             isOpen={props.isOpen} 
             forms="form"
             onSubmit={handleSubmit}>
             <input className="form__input form__input_edit_name" 
-                minLength="2" maxLength="40" 
-                id="user-name" name="nickname" 
-                type="text" placeholder="Имя профиля" 
-                value={nickname || ''} autoComplete="off" 
-                onChange={handleChangeName} required />
+                minLength="2" 
+                maxLength="40" 
+                id="user-name" 
+                name="nickname" 
+                type="text" 
+                placeholder="Имя профиля" 
+                value={nickname || ''} 
+                autoComplete="off" 
+                onChange={handleChangeName} 
+                required />
             <span className="form__error" 
                 id="user-name-error"></span>
             <input className="form__input form__input_edit_about" 
-                minLength="2" maxLength="200" id="user-about" 
-                name="about" type="text" 
+                minLength="2" 
+                maxLength="200" 
+                id="user-about" 
+                name="about" 
+                type="text" 
                 placeholder="Описание профиля" 
-                value={description || ''} autoComplete="off" 
-                onChange={handleChangeAbout} required />
+                value={description || ''} 
+                autoComplete="off" 
+                onChange={handleChangeAbout} 
+                required />
             <span className="form__error" id="user-about-error"></span>
       </PopupWithForm>
       </>

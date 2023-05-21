@@ -29,19 +29,31 @@ function AddPlacePopup(props) {
 
     return(
         <PopupWithForm name="place" 
-        title="Новое место" text="Сохранить" 
-        onClose={props.onClose} isOpen={props.isOpen} 
-        forms="form" onSubmit={handleSubmit}>
+        title="Новое место" 
+        text={props.isLoading ? 'Сохранение...' : 'Сохранить'} 
+        onClose={props.onClose} 
+        isOpen={props.isOpen} 
+        forms="form" 
+        onSubmit={handleSubmit}>
             <input className="form__input form__input_add_name" 
-            minLength="2" maxLength="30" id="place-name" 
-            name="placeName" type="text" placeholder="Название" 
-            value={name || ''} autoComplete="off" onChange={handleChangeName} 
+            minLength="2" 
+            maxLength="30" 
+            id="place-name" 
+            name="placeName" 
+            type="text" placeholder="Название" 
+            value={name || ''} 
+            autoComplete="off" 
+            onChange={handleChangeName} 
             required />
             <span className="form__error" id="place-name-error"></span>
             <input className="form__input form__input_add_link" 
-            id="place-link" name="placeLink" type="url" 
-            alt="" placeholder="Ссылка на картинку" 
-            value={link || ''} autoComplete="off" onChange={handleChangeLink} 
+            id="place-link" 
+            name="placeLink" type="url" 
+            alt="" 
+            placeholder="Ссылка на картинку" 
+            value={link || ''} 
+            autoComplete="off" 
+            onChange={handleChangeLink} 
             required />
             <span className="form__error" id="place-link-error"></span>
         </PopupWithForm>
